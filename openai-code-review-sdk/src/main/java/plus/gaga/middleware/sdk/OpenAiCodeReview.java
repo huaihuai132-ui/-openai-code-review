@@ -102,7 +102,7 @@ public class OpenAiCodeReview {
 
     private static String codeReview(String diffCode) throws Exception {
 
-        String apiKeySecret = "c78fbacd3e10118ad5649d7a54a3a163.UunYDBxpzeClvSKZ";
+        String apiKeySecret = "58a405445d0a4f729d97247aa51fb59d.sPxrfZR8sWAMFChY";
         String token = BearerTokenUtils.getToken(apiKeySecret);
 
         URL url = new URL("https://open.bigmodel.cn/api/paas/v4/chat/completions");
@@ -152,7 +152,7 @@ public class OpenAiCodeReview {
 
     private static String writeLog(String token, String log) throws Exception {
         Git git = Git.cloneRepository()
-                .setURI("https://github.com/fuzhengwei/openai-code-review-log.git")
+                .setURI("https://github.com/huaihuai1329/openai-code-review-log.git")
                 .setDirectory(new File("repo"))
                 .setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, ""))
                 .call();
@@ -175,7 +175,7 @@ public class OpenAiCodeReview {
 
         System.out.println("Changes have been pushed to the repository.");
 
-        return "https://github.com/fuzhengwei/openai-code-review-log/blob/master/" + dateFolderName + "/" + fileName;
+        return "https://github.com/huaihuai1329/openai-code-review-log.git/blob/master/" + dateFolderName + "/" + fileName;
     }
 
     private static String generateRandomString(int length) {

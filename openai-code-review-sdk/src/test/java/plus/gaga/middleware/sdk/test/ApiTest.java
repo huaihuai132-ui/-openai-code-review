@@ -19,14 +19,14 @@ import java.util.Scanner;
 public class ApiTest {
 
     public static void main(String[] args) {
-        String apiKeySecret = "c78fbacd3e10118ad5649d7a54a3a163.UunYDBxpzeClvSKZ";
+        String apiKeySecret = "58a405445d0a4f729d97247aa51fb59d.sPxrfZR8sWAMFChY";
         String token = BearerTokenUtils.getToken(apiKeySecret);
         System.out.println(token);
     }
 
     @Test
     public void test_http() throws IOException {
-        String apiKeySecret = "c78fbacd3e10118ad5649d7a54a3a163.UunYDBxpzeClvSKZ";
+        String apiKeySecret = "58a405445d0a4f729d97247aa51fb59d.sPxrfZR8sWAMFChY";
         String token = BearerTokenUtils.getToken(apiKeySecret);
 
         URL url = new URL("https://open.bigmodel.cn/api/paas/v4/chat/completions");
@@ -41,7 +41,7 @@ public class ApiTest {
         String code = "1+1";
 
         String jsonInpuString = "{"
-                + "\"model\":\"glm-4-flash\","
+                + "\"model\":\"glm-4.5-flash\","
                 + "\"messages\": ["
                 + "    {"
                 + "        \"role\": \"user\","
