@@ -9,8 +9,8 @@ import java.net.URL;
 
 public class WXAccessTokenUtils {
 
-    private static final String APPID = "wx5a228ff69e28a91f";
-    private static final String SECRET = "0bea03aa1310bac050aae79dd8703928";
+    private static final String APPID = "wx7a9f2a34ea6d48e7";
+    private static final String SECRET = "49b3cae2ee279f780490d15fbd891dd5";
     private static final String GRANT_TYPE = "client_credential";
     private static final String URL_TEMPLATE = "https://api.weixin.qq.com/cgi-bin/token?grant_type=%s&appid=%s&secret=%s";
 
