@@ -112,8 +112,8 @@ public class ApiTest {
     }
 
     public static class Message {
-        private String touser = "or0Ab6ivwmypESVp_bYuk92T6SvU";
-        private String template_id = "mKhGjV7UAV7Se9_byoPrgRlNfgJac8ZAfLnK8hyGmTQ";
+        private String touser = "oEV1H7Nx7eUN6ezpEeHoWA8SLahk";
+        private String template_id = "CPWgd2MGTjpmbOiBTy2qorl4zGwiHvweHWmYdqk-rJ4";
         private String url = "https://github.com/fuzhengwei/openai-code-review-log/blob/master/2024-07-27/Wzpxr6j1JY9k.md";
         private Map<String, Map<String, String>> data = new HashMap<>();
 
