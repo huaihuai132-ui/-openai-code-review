@@ -176,7 +176,7 @@ public class OpenAiCodeReview {
 
         System.out.println("Changes have been pushed to the repository.");
 
-        return "https://github.com/huaihuai1329/openai-code-review-log.git/blob/master/" + dateFolderName + "/" + fileName;
+        return "https://github.com/huaihuai1329/openai-code-review-log/blob/master/" + dateFolderName + "/" + fileName;
     }
 
     private static String generateRandomString(int length) {
