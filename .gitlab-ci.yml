@@ -1,0 +1,84 @@
+stages:
+  - review
+
+# 定义变量（可选：也可在 GitLab CI/CD 设置中配置）
+variables:
+  JAR_NAME: "openai-code-review-sdk-1.0.jar"
+  JAR_URL:  "https://github.com/huaihuai1329/openai-code-review/releases/download/v1.0/openai-code-review-sdk-1.0.jar"
+  LIBS_DIR: "./libs"
+
+# AI 代码审查任务
+ai_code_review:
+  stage: review
+  image: openjdk:17-jre  # 使用稳定版本，避免 latest 不确定性
+  cache:
+    key: ${CI_PROJECT_NAME}-deps
+    paths:
+      - ${LIBS_DIR}/  # 缓存下载的 JAR，避免重复下载
+    policy: pull-push
+  script:
+    - |
+      #!/bin/bash
+      set -e  # 遇错立即退出
+      set -x  # 打印执行命令（便于调试）
+
+      echo "========================================"
+      echo "🚀 开始执行 AI 代码审查任务"
+      echo "项目: $CI_PROJECT_NAME"
+      echo "分支: $CI_COMMIT_REF_NAME"
+      echo "提交者: wt"
+      echo "提交信息: $CI_COMMIT_MESSAGE"
+      echo "========================================"
+
+      # --- 导出环境变量 ---
+      export GITHUB_REVIEW_LOG_URI="${CODE_REVIEW_LOG_URI}"
+      export GITHUB_TOKEN="${CODE_TOKEN}"
+      export COMMIT_PROJECT="${CI_PROJECT_NAME}"
+      export COMMIT_BRANCH="${CI_COMMIT_REF_NAME}"
+      export COMMIT_AUTHOR="xbhog"
+      export COMMIT_MESSAGE="${CI_COMMIT_MESSAGE}"
+      export CHATGLM_APIHOST="${CHATGLM_APIHOST}"
+      export CHATGLM_APIKEYSECRET="${CHATGLM_APIKEYSECRET}"
+      export WEIXIN_APPID="${WEIXIN_APPID}"
+      export WEIXIN_SECRET="${WEIXIN_SECRET}"
+      export WEIXIN_TOUSER="${WEIXIN_TOUSER}"
+      export WEIXIN_TEMPLATE_ID="${WEIXIN_TEMPLATE_ID}"
+
+      # --- 校验必要变量 ---
+      if [ -z "$GITHUB_TOKEN" ]; then
+        echo "❌ 错误: 缺少 CODE_TOKEN 环境变量，请在 CI/CD Variables 中设置"
+        exit 1
+      fi
+
+      if [ -z "$CODE_REVIEW_LOG_URI" ]; then
+        echo "⚠️  警告: CODE_REVIEW_LOG_URI 未设置，可能影响日志上传"
+      fi
+
+      # --- 创建 libs 目录 ---
+      mkdir -p ${LIBS_DIR}
+
+      # --- 下载 JAR（仅当不存在时） ---
+      if [ ! -f "${LIBS_DIR}/${JAR_NAME}" ]; then
+        echo "📥 正在下载 AI 审查工具..."
+        wget -q --show-progress -O "${LIBS_DIR}/${JAR_NAME}" "${JAR_URL}"
+        echo "✅ 下载完成: ${JAR_NAME}"
+      else
+        echo "📦 使用缓存的 JAR 文件: ${JAR_NAME}"
+      fi
+
+      # --- 检查文件是否存在 ---
+      if [ ! -s "${LIBS_DIR}/${JAR_NAME}" ]; then
+        echo "❌ 错误: JAR 文件为空或下载失败"
+        rm -f "${LIBS_DIR}/${JAR_NAME}"
+        exit 1
+      fi
+
+      # --- 运行 AI 审查工具 ---
+      echo "🤖 正在运行 AI 代码审查..."
+      java -jar "${LIBS_DIR}/${JAR_NAME}"
+
+      echo "✅ AI 代码审查任务执行完成"
+  only:
+    - master
+  tags:
+    - shared-runner  # 可选：指定使用哪个 Runner（根据你的环境调整）
