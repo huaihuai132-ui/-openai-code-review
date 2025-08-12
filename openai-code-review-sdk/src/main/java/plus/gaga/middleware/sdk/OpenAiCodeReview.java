@@ -13,14 +13,14 @@ public class OpenAiCodeReview {
     private static final Logger logger = LoggerFactory.getLogger(OpenAiCodeReview.class);
 
     // 配置配置
-    private String weixin_appid = "wx5a228ff69e28a91f";
-    private String weixin_secret = "0bea03aa1310bac050aae79dd8703928";
-    private String weixin_touser = "or0Ab6ivwmypESVp_bYuk92T6SvU";
-    private String weixin_template_id = "l2HTkntHB71R4NQTW77UkcqvSOIFqE_bss1DAVQSybc";
+    private String weixin_appid = "wx7a9f2a34ea6d48e7";
+    private String weixin_secret = "49b3cae2ee279f780490d15fbd891dd5";
+    private String weixin_touser = "oEV1H7Nx7eUN6ezpEeHoWA8SLahk";
+    private String weixin_template_id = "b5zkzeyf2mxTO177ysahD0-0ExlrXZIs6LV_xTO-JLI";
 
     // ChatGLM 配置
     private String chatglm_apiHost = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
-    private String chatglm_apiKeySecret = "";
+    private String chatglm_apiKeySecret = "58a405445d0a4f729d97247aa51fb59d.sPxrfZR8sWAMFChY";
 
     // Github 配置
     private String github_review_log_uri;
