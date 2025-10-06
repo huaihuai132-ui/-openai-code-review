@@ -1,6 +1,12 @@
 stages:
   - review
 
+# 定义变量（可选：也可在 GitLab CI/CD 设置中配置）
+variables:
+  JAR_NAME: "openai-code-review-sdk-1.0.jar"
+  JAR_URL:  "https://github.com/huaihuai1329/openai-code-review/releases/download/v1.0/openai-code-review-sdk-1.0.jar"
+  LIBS_DIR: "./libs"
+
 # AI 代码审查任务
 ai_code_review:
   stage: review
